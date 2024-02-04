@@ -96,5 +96,8 @@ body {
 .back {
   transform: rotateY(180deg);
   background-color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
