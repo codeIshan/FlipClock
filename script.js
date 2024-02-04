@@ -65,4 +65,17 @@ function initClock() {
     setInterval(updateClock, 1000);
 }
 
-document.addEventListener('DOMContentLoaded', initClock);
+document.addEventListener('DOMContentLoaded', function () {
+    initClock();
+
+    // Add an event listener to the input element inside the switch
+    const switchInput = document.querySelector('.switch input');
+    switchInput.addEventListener('change', function () {
+        const slider = document.querySelector('.slider.round');
+        if (this.checked) {
+            slider.classList.add('neon');
+        } else {
+            slider.classList.remove('neon');
+        }
+    });
+});

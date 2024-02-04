@@ -36,6 +36,7 @@ body {
   width: 50px;
   height: 100px;
   perspective: 1000px;
+  cursor: pointer;
   margin: 0 5px;
   border-radius: 13px; /* Add this line for rounded corners */
   overflow: hidden; /* Ensure overflow is hidden for rounded corners */
@@ -101,3 +102,79 @@ body {
   justify-content: center;
 }
 
+
+.switch {
+  position: absolute;
+  display: inline-block;
+  bottom: 200px;
+  left: 50%;
+  width: 60px;
+  height: 34px;
+  transform: translateX(-50%);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  background-color: #262627;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: rgb(176, 169, 157);
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(173, 216, 230, 0.8);
+
+}
+
+ /* border neon */
+input:checked + .slider {
+  background-color: #262627;
+  border: 1px solid rgba(173, 216, 230, 0.8);
+
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #262627;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.slider.neon:before {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.8);
+  animation: neon-border;
+}
+
+@keyframes neon-border {
+  0% {
+      border-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+      border-color: rgba(173, 216, 230, 0.8);
+      box-shadow: 0 0 10px rgba(173, 216, 230, 0.8), 0 0 20px rgba(173, 216, 230, 0.8);
+  }
+}
