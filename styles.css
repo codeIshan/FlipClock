@@ -1,93 +1,100 @@
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #000000;
-    color: rgb(176, 169, 157);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #000000;
+  color: rgb(176, 169, 157);
+}
+
+.clock {
+  display: flex;
+  font-size: 3rem;
+}
+.folder{
+  width: 350px;
+  height: 150px;
+  perspective: 5000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(21, 21, 21);
+  border-radius: 150px;
+  overflow: hidden;
+  position: relative;
+
+}
+
+@keyframes glow {
+  0%{
+      box-shadow: 0 0 20px 0px rgba(208, 208, 179, 0.3);
   }
-  
-  .clock {
-    display: flex;
-    font-size: 3rem;
-  }
-  .folder{
-    width: 350px;
-    height: 150px;
-    perspective: 5000px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(21, 21, 21);
-    border-radius: 150px;
-    overflow: hidden;
-    position: relative;
-  }
+}
 
 .card {
-    width: 50px;
-    height: 100px;
-    perspective: 1000px;
-    margin: 0 5px;
-    border-radius: 13px; /* Add this line for rounded corners */
-    overflow: hidden; /* Ensure overflow is hidden for rounded corners */
-    position: relative; /* Add this line to ensure positioning */
+  width: 50px;
+  height: 100px;
+  perspective: 1000px;
+  margin: 0 5px;
+  border-radius: 13px; /* Add this line for rounded corners */
+  overflow: hidden; /* Ensure overflow is hidden for rounded corners */
+  position: relative; /* Add this line to ensure positioning */
 }
 
 .front,
 .back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    border-radius: 8px; /* Add this line for rounded corners */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 8px; /* Add this line for rounded corners */
 }
 
-  
-  .flipper {
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.8s;
-  }
-  .ampm-card {
-    width: 30px;
-    height: 50px;
-    perspective: 500px; /* Adjust perspective as needed */
-    margin: 0 8px 50px;
-    border-radius: 13px;
-    overflow: hidden;
-    position: relative;
 
-  }
-  .ampm-card .back{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.flipper {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+.ampm-card {
+  width: 30px;
+  height: 50px;
+  perspective: 500px; /* Adjust perspective as needed */
+  margin: 0 8px 50px;
+  border-radius: 13px;
+  overflow: hidden;
+  position: relative;
 
-  
-  .card:hover .flipper {
-    transform: rotateY(180deg);
-  }
-  
-  
-  .colon {
-    font-size: 5rem;
-    color: rgb(176, 169, 157); /* Adjust color as needed */
+}
+.ampm-card .back{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-  
-  .front {
-    background-color: #111111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .back {
-    transform: rotateY(180deg);
-    background-color: #111111;
-  }
-  
+
+.card:hover .flipper {
+  transform: rotateY(180deg);
+}
+
+
+.colon {
+  font-size: 5rem;
+  color: rgb(176, 169, 157); /* Adjust color as needed */
+}
+
+
+.front {
+  background-color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back {
+  transform: rotateY(180deg);
+  background-color: #111111;
+}
+

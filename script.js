@@ -11,6 +11,10 @@ function updateClock() {
     updateCard('ampm', ampm); // Added for AM/PM
     updateCard('minuteTens', minute.charAt(0));
     updateCard('minuteUnits', minute.charAt(1));
+
+    const folder = document.querySelector('.folder');
+    folder.style.animation = `glow ${1}s infinite alternate`; // Add animation based on the second
+
 }
 
 
@@ -21,6 +25,8 @@ function updateCard(cardId, value) {
 
     front.textContent = value;
 }
+
+
 
 function updateBlinkingColon() {
     const colon = document.getElementById('colon');
