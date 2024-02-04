@@ -1,22 +1,33 @@
 function updateClock() {
     const now = new Date();
-    const hour = now.getHours().toString().padStart(2, '0');
-    const minute = now.getMinutes().toString().padStart(2, '0');
-    const second = now.getSeconds();
+    let hour = now.getHours();
     const ampm = hour >= 12 ? 'PM' : 'AM';
 
-    updateCard('hourTens', hour.charAt(0));
-    updateCard('hourUnits', hour.charAt(1));
+    // Convert to 12-hour format
+    hour = hour % 12 || 12;
+
+    const hourString = hour.toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+
+    updateCard('hourTens', hourString.charAt(0));
+    updateCard('hourUnits', hourString.charAt(1));
     updateBlinkingColon();
-    updateCard('ampm', ampm); // Added for AM/PM
+    updateCard('ampm', ampm);
     updateCard('minuteTens', minute.charAt(0));
     updateCard('minuteUnits', minute.charAt(1));
 
     const folder = document.querySelector('.folder');
-    folder.style.animation = `glow ${1}s infinite alternate`; // Add animation based on the second
+    folder.style.animation = `glow ${1}s infinite alternate`;
+
+    setTimeout(() => resetCards(), 1000); // Reset cards after 1 second
 
 }
 
+// Reset the cards to position after 1 sec
+function resetCards() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {card.style.transform = 'rotateY(0deg)';});
+}
 
 function updateCard(cardId, value) {
     const card = document.getElementById(cardId);
@@ -24,9 +35,24 @@ function updateCard(cardId, value) {
     const back = card.querySelector('.back');
 
     front.textContent = value;
+    back.textContent = getNextNumber(cardId, value);
 }
 
+function getNextNumber(cardId, currentValue) {
+    const num = parseInt(currentValue);
 
+    if (cardId === 'ampm') {
+        return currentValue === 'AM' ? 'PM' : 'AM'; // Flip between AM and PM
+    } else if (cardId !== 'ampm' && num === 9) {
+        return 0; // All other cards go back to 0 when the current value is 9
+    } else if (cardId == 'hourTens' && num === 1) {
+        return 0; // Special case for hours: If it's 12, go back to 1
+    } else if (cardId == 'minuteTens' && num === 5) {
+        return 0;
+    } else {
+        return num + 1; // Regular successor calculation for other cases
+    }
+}
 
 function updateBlinkingColon() {
     const colon = document.getElementById('colon');
@@ -39,4 +65,17 @@ function initClock() {
     setInterval(updateClock, 1000);
 }
 
-document.addEventListener('DOMContentLoaded', initClock);
+document.addEventListener('DOMContentLoaded', function () {
+    initClock();
+
+    // Add an event listener to the input element inside the switch
+    const switchInput = document.querySelector('.switch input');
+    switchInput.addEventListener('change', function () {
+        const slider = document.querySelector('.slider.round');
+        if (this.checked) {
+            slider.classList.add('neon');
+        } else {
+            slider.classList.remove('neon');
+        }
+    });
+});
